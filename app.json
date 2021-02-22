@@ -1,0 +1,12 @@
+{
+  "name": "yeeun",
+  "displayName": "yeeun",
+  "expo": {
+    "name": "yeeun",
+    "slug": "yeeun",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
