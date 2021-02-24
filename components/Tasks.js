@@ -1,33 +1,60 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import { View, Button, Image } from 'react-native';
-import { Card } from 'react-native-elements';
-import { LISTDATA } from './image'
+// import React from 'react';
+// import { useSelector } from 'react-redux'
+// import { Text, View } from 'react-native';
 
+// // 함수의 리턴 값이 JSX.Element면
+// // React 컴포넌트가 된다.
 
+// // JSX를 쓰려면 import React from 'react';
+// const Actions = () => {
 
-const Tasks = ({ route, navigation }) => {
+//   // store에 특정(actions) state를 선택
+//   const actions = useSelector(state => state.actions);
+//   console.log("-- actions redux state --");
+//   console.log(actions);
 
-  console.log("routes", route);
-  const { id } = route.params;
-  console.log("id :", id)
-  console.log("LISTDATA :", LISTDATA)
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         justifyContent: "center",
+//         alignItems: "center"
+//       }}>
+//       <Text>Actions</Text>
+//     </View>
+//   )
+// }
+// export default Actions;
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View } from 'react-native';
+import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { ScrollView } from 'react-native-gesture-handler';
 
-  return (
-    <View style={{
-      flex: 1,
-      marginTop: -40,
-      alignItems: "center"
-    }}>
+import { removeAction } from '../redux/actions'
 
-      <Card.Title>{LISTDATA[id].title}</Card.Title>
-      <Card.Divider />
-      <Image source={LISTDATA[id].image} />
+const Tasks = ({ navigation }) => {
 
-      <Card.Title>{LISTDATA[id].result} </Card.Title>
-      <Button
-        style={{ width: 100, height: 30 }}
-        title="처음으로 돌아가기" color="gray" onPress={() => { navigation.navigate("Home"); }} />
+  const actions = useSelector(state => state.actions);
+  console.log("-- actions state in Actions Component --");
+  console.log(actions);
+
+  const dispatch = useDispatch();
+
+  return(
+    <View style={{flex:1}}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center", justifyContent: 'center' }}>
+      {
+        actions.map((item, i) => (
+          <ListItem containerStyle={{width:"100%"}} key={i} onPress={()=>{navigation.navigate("Details", {id: item.id})}}>
+            <Avatar source={item.image} />
+            <Icon name='close' type='ionicon' color='gray' onPress={()=>{dispatch(removeAction(item.id))}} />
+          </ListItem>
+        ))
+      }
+      </ScrollView>
     </View>
   )
 }
+
 export default Tasks;

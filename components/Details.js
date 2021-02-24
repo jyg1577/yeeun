@@ -1,58 +1,76 @@
-import 'react-native-gesture-handler';
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
-
-import { Card } from 'react-native-elements';
-import { LISTDATA } from './image'
-import { styles, firstRowStyles } from './css/details'
-
-const IMAGE = require('../image/card.jpg');
+import React, { useEffect, useCallback, useState } from 'react';
+import { View, Button, Image } from 'react-native';
+import { Card, Icon } from 'react-native-elements';
 
 
-const Details = ({ navigation }) => {
-
-  const FirstRowStyles = [firstRowStyles.con1, firstRowStyles.con2, firstRowStyles.con3, firstRowStyles.con4]
-  const customStyles = [styles.con1, styles.con2, styles.con3, styles.con4]
-  cardList = customStyles.map(
-    (customStyle, i) => (
-      <View key={i} style={{ flexDirection: 'row' }}>
-
-        <TouchableOpacity onPress={() => { navigation.navigate("Tasks", { id: Math.floor(Math.random() * LISTDATA.length) }) }} >
-          <Card.Image source={IMAGE}
-            style={FirstRowStyles[i]} >
-          </Card.Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { navigation.navigate("Tasks", { id: Math.floor(Math.random() * LISTDATA.length) }) }} >
-          <Card.Image source={IMAGE}
-            style={customStyle} >
-          </Card.Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { navigation.navigate("Tasks", { id: Math.floor(Math.random() * LISTDATA.length) }) }} >
-          <Card.Image source={IMAGE}
-            style={customStyle} >
-          </Card.Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { navigation.navigate("Tasks", { id: Math.floor(Math.random() * LISTDATA.length) }) }} >
-          <Card.Image source={IMAGE}
-            style={customStyle} >
-          </Card.Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { navigation.navigate("Tasks", { id: Math.floor(Math.random() * LISTDATA.length) }) }} >
-          <Card.Image source={IMAGE}
-            style={customStyle} >
-          </Card.Image>
-        </TouchableOpacity>
+import { useDispatch, useSelector } from 'react-redux'
+import { addAction, removeAction } from '../redux/actions/index'
 
 
-      </View>
-    )
-  )
+import { LISTDATA } from './carddata'
+
+
+
+const Details = ({ route, navigation }) => {
+
+  console.log("routes", route);
+  const { id } = route.params;
+
+console.log("--------------------------------------------------");
+console.log(id);
+
+  const item = LISTDATA.filter(item => item.id == id)[0];
+  console.log(item);
+
+  const dispatch = useDispatch();
+
+  const actions = useSelector(state => state.actions);
+  console.log("--actions--");
+  console.log(actions);
+
+  const isExistedAction = actions.filter(item => item.id == id).length > 0 ? true : false;
+  console.log("--isExistedAction--");
+  console.log(isExistedAction);
+
+
+  // console.log("id :", id)
+  // console.log("LISTDATA :", LISTDATA)
+
   return (
-    <View>
-      <Text style={{ textAlign: 'center', marginTop: 30, fontSize: 30 }}>카드를 한장 뽑아주세요</Text>
-      {cardList}
-    </View>
-  );
-}
+    <View style={{
+      flex: 1,
+      marginTop: -40,
+      alignItems: "center"
+    }}>
 
+      <Card.Title>{LISTDATA[id].title}</Card.Title>
+      <Card.Divider />
+      <Image source={LISTDATA[id].image} />
+
+
+      <Card.Title>{LISTDATA[id].result} </Card.Title>
+      <Button
+        style={{ width: 100, height: 30 }}
+        title="처음으로 돌아가기" color="gray" onPress={() => { navigation.navigate("Home"); }} />
+ {
+          isExistedAction 
+            ?
+            <Button
+              onPress={()=>{dispatch(removeAction(id))}}
+              icon={<Icon name='close' type='ionicon' color='#ffffff' />}
+              buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:"gray"}}
+              title='REMOVE' 
+            /> 
+            :
+            <Button
+              onPress={()=>{dispatch(addAction(item))}}
+              icon={<Icon name='checkmark' type='ionicon' color='#ffffff' />}
+              buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:"tomato"}}
+              title='LIKE' 
+            />    
+        }
+
+    </View>
+  )
+}
 export default Details;

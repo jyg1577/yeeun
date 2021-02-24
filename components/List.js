@@ -12,7 +12,7 @@ const List = ({ navigation }) => {
         alignItems: "center"
       }}>
         <Button
-          title="NEXT" color="gray" onPress={() => { navigation.navigate("Details") }}
+          title="NEXT" color="gray" onPress={() => { navigation.navigate("SearchCard") }}
         />
       </View>
     </ImageBackground>
