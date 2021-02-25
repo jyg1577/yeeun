@@ -12,11 +12,11 @@ const List = ({ navigation }) => {
         alignItems: "center"
       }}>
         <Button
-          title="NEXT" color="gray" onPress={() => { navigation.navigate("SearchCard") }}
+          title="카드 뽑으러 가기" color="gray" onPress={() => { navigation.navigate("SearchCard") }}
         />
       </View>
     </ImageBackground>
 
   );
 }
-export default List
+export default List;
