@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "801849620681",
+    "project_id": "notification-lecture-a34f6",
+    "storage_bucket": "notification-lecture-a34f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801849620681:android:1960bf1976793d29627518",
+        "android_client_info": {
+          "package_name": "com.yeeun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801849620681-fn2kc2ssmkqvhftvg0hbfefl1lf8amum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6g0K-JgZELbNYNTB_qQNNgVsw8IAPYiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801849620681-fn2kc2ssmkqvhftvg0hbfefl1lf8amum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
