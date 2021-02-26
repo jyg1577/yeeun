@@ -8,20 +8,6 @@ import { styles, firstRowStyles } from './css/searchCard'
 import api from '../api/list'
 const IMAGE = require('../image/card.jpg');
 
-// const [list, setList] = useState([]);
-
-// const getList =useCallback(async () => {
-//   // 해당컴포넌트에 async 가있어야 await사용가능
-//   const result = await api.list();
-//   console.log(result.data);
-//   setList(result.data);
-// }, [])
-
-
-// useEffect(()=>{
-//   getList();
-// }, []);
-
 
 const SearchCard = ({ navigation }) => {
 

@@ -60,7 +60,7 @@ const Details = ({ route, navigation }) => {
 
             isExistedTask
               ?
-              <View style={{ width: 100, }}>
+              <View >
                 <Icon name="heart" type='ionicon' color="red"
                   onPress={() => { dispatch(removeTask(id)) }}
   
@@ -68,7 +68,7 @@ const Details = ({ route, navigation }) => {
               </View>
 
               :
-              <View >
+              <View style={{ width: 70 }}>
                 <Icon name="heart" type='ionicon'
                   onPress={() => { dispatch(addTask(item)) }}
                 />
