@@ -9,7 +9,7 @@ import Home from './Home'
 import List from './List'
 import SearchCard from './SearchCard'
 import Details from './Details';
-import Tasks from './Tasks';
+import Like from './Like';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Alert } from 'react-native'
@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Tab = createBottomTabNavigator();
 const ListStack = createStackNavigator();
 const HomeStack = createStackNavigator();
-const TasksStack = createStackNavigator();
+const LikeStack = createStackNavigator();
 
 const HomeStackScreen = () => {
   return (
@@ -43,13 +43,13 @@ const ListStackScreen = () => {
     </ListStack.Navigator>
   )
 }
-const TasksStackScreen = () => {
+const LikeStackScreen = () => {
   return (
-    <TasksStack.Navigator>
-      <TasksStack.Screen name="Tasks" component={Tasks} options={{title:"Tasks", headerTitleAlign:"center"}} />
-      <TasksStack.Screen name="Details" component={Details} options={{title:"Details", headerTitleAlign:"center"}} />
+    <LikeStack.Navigator>
+      <LikeStack.Screen name="Like" component={Like} options={{title:"Like", headerTitleAlign:"center"}} />
+      <LikeStack.Screen name="Details" component={Details} options={{title:"Details", headerTitleAlign:"center"}} />
 
-    </TasksStack.Navigator>
+    </LikeStack.Navigator>
   )
 }
 
@@ -68,7 +68,7 @@ const screenOptions = ({ route }) => ({
           ? 'chevron-forward-circle'
           : 'chevron-forward-circle-outline'; 
         break;     
-        case 'Tasks':
+        case 'Like':
           iconName = focused
             ? 'heart'
             : 'heart-outline'; 
@@ -114,7 +114,7 @@ export default function Main() {
           <Tab.Navigator screenOptions={screenOptions} tabBarOptions={tabBarOptions}>
             <Tab.Screen name="Home" component={HomeStackScreen} />
             <Tab.Screen name="List" component={ListStackScreen} />
-            <Tab.Screen name="Tasks" component={TasksStackScreen} />
+            <Tab.Screen name="Like" component={LikeStackScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
